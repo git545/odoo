@@ -1,0 +1,308 @@
+<odoo>
+    <template id="memory_temp">
+        <t t-set="title">Memories</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table>
+                                 <tr>
+                                     <td valign="top">
+                                         <t t-call="gvp_website.sidemenu_gvp"/>
+                                     </td>
+                                     <td align="left" >
+                                         <div class="wrapper" >
+                                         <div class="section">
+                                                 <div class="form-group"><br/>
+                                                       <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u><label>Create New Album</label></u></center></h4>
+                                                   <hr/>
+                                                      <form  action="/album" method='POST' enctype="multipart/form-data">
+                                                      <table>
+                                                          <tr>
+                                                             <td>
+                                                                 <label>Album Name:<font color="red"><b>*</b></font></label>
+                                                                 <input type="text" class="form-control" name="txt_albumname" required="true" placeholder="example:Convocation" />
+                                                             </td>
+                                                         </tr>
+                                                          <tr>
+                                                             <td>
+                                                                 <label class="col-form-label" for="mid">When were pictures taken?<br/>Month:<font color="red"><b>*</b></font></label>
+                                                                  <select name="month_to1" t-attf-class="form-control" style="width:auto;" required="true">
+                                                                    <t t-foreach="from_month" t-as="tom">
+                                                                        <option t-att-value="tom" >
+                                                                            <t t-esc="tom" />
+                                                                        </option>
+                                                                    </t>
+                                                                </select>
+
+                                                                   <label class="col-form-label" for="yearid"><br/>Year :<font color="red"><b>*</b></font></label>
+                                                                     <select name="year_to1" t-attf-class="form-control" style="width:auto;" required="true">
+                                                                         <t t-foreach="to_year_dd" t-as="end">
+                                                                            <option t-att-value="end.pass_year" >
+                                                                                <t t-esc="end.pass_year" />
+                                                                            </option>
+                                                                         </t>
+                                                                     </select>
+
+                                                             </td>
+                                                         </tr>
+                                                          <tr>
+                                                              <td>
+                                                                    <label style=" border: 1px solid #ccc;display: inline-block;height:50px;  padding: 6px 12px;cursor: pointer;">
+
+                                                                  	<input type = "file" name = "album_img" accept="image/*" required="true"/>
+                                                                   Select Photo :<font color="red"><b>*</b></font>
+                                                                    </label>
+                                                                  <br/>
+                                                                 <input type="submit" class="btn btn-primary" value="Add Album" />
+                                                              </td>
+                                                          </tr>
+                                                     </table>
+                                                       </form>
+                                                </div>
+                                         </div>
+                                         </div>
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+        <div class="oe_structure"/>
+</template>
+    <template id="view_album">
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td>
+
+                                             <html>
+                                                 <head>
+                                                     <style>
+                                                        * {
+                                                          box-sizing: border-box;
+                                                        }
+
+                                                        /* Create three equal columns that floats next to each other */
+                                                        .column {
+                                                          float: left;
+                                                          width: 257px;
+                                                          padding: 10px;
+                                                        }
+
+                                                        /* Clear floats after the columns */
+                                                        .rowcc {
+                                                          content: "";
+                                                          display: table;
+                                                          clear: both;
+                                                           width:auto;
+                                                        }
+                                                        </style>
+                                                 </head>
+                                             </html>
+                                             <br/>
+                                             <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u> <label>View Album</label></u></center></h4>
+                                             <hr/>
+                                             <div class="rowcc">
+                                             <t t-foreach="album_get" t-as="aget">
+                                                <div class="column">
+                                                            <table>
+                                                                <tr>
+                                                                    <td >
+                                                                            <a t-att-href="'/viewalbum/%s/add'%aget.id">
+                                                                            <img  t-attf-src="data:image/png;base64,{{aget.album_img}}"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:220PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                             <font color="black"><b>          <t t-esc="aget.album_name"/> </b></font>     <small><t t-esc="aget.album_month"/>-<t t-esc="aget.album_year"/></small><br/>
+                                                                               <center> (<t t-esc="aget.cnt"/> Photos)</center>
+                                                                        </a>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                </div>
+                                                 </t>
+                                            </div>
+
+                                     </td>
+                                 </tr>
+                             </table>
+
+                 </t>
+            </div>
+        </div>
+      </template>
+    <template id="save_album">
+        <t t-set="title">View Album</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table width="100%">
+                                 <tr>
+                                     <td valign="top">
+                                         <t t-call="gvp_website.sidemenu_gvp"/>
+                                     </td>
+                                     <td align="left" >
+
+                                           <center>
+                 <h3>Album create/Images successfully saved.</h3>
+                        <a href="/viewalbum" class="nav-link">View album</a>
+                </center>
+
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+      </template>
+    <template id="errpage">
+        <t t-set="title">Create Album</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table width="100%">
+                                 <tr>
+                                     <td valign="top">
+                                         <t t-call="gvp_website.sidemenu_gvp"/>
+                                     </td>
+                                     <td align="left" >
+                                           <center>
+                                             <h3>  <p class="alert alert-danger" t-if="album_error" role="alert">
+                                                    <t t-esc="album_error"/>
+                                                    </p></h3>
+                                                    <a href="/cralbum" class="nav-link">Go Back to album</a>
+                                            </center>
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+      </template>
+    <template id="add_album_img">
+        <t t-set="title">Add Images to Album</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" valign="top">
+                                             <html>
+                                                 <head>
+                                                     <style>
+                                                        * {
+                                                          box-sizing: border-box;
+                                                        }
+
+                                                        /* Create three equal columns that floats next to each other */
+                                                        .column {
+                                                          float: left;
+                                                          width: 257px;
+                                                          padding: 10px;
+                                                        }
+
+                                                        /* Clear floats after the columns */
+                                                        .rowcc {
+                                                          content: "";
+                                                          display: table;
+                                                          clear: both;
+                                                           width:auto;
+                                                        }
+                                                        </style>
+                                                 </head>
+                                             </html>
+
+                                                    <t t-foreach="get_album_name" t-as="gname">
+                                                        <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u> <label>Add More Images</label></u></center></h4>
+                                                    <hr/>
+                                                      <form  action="/addmore" method='POST' enctype="multipart/form-data">
+                                                      <table>
+                                                         <tr>
+                                                             <td>
+                                                                 <label>Short Title:<font color="red"><b>*</b></font></label>
+                                                                 <input type="text" class="form-control" name="txt_desc" required="true"  style="width:157px;"/>
+                                                             </td>
+                                                              <td  style="padding:5px;">
+                                                                   <label>Select Photo :<font color="red"><b>*</b></font></label><br/>
+                                                                   <input type = "file" name = "album_img_more" accept="image/*" required="true"/>
+                                                              </td>
+                                                             <td>
+                                                                 <input type="submit" class="btn btn-primary" value="Add Image" />
+                                                             </td>
+                                                          </tr>
+                                                     </table>
+                                                          <hr/>
+                                                       </form>
+                                                        <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u><t t-esc="gname.album_name"/>-Album</u></center></h4>
+                                                    </t>
+
+
+                                        <div class="rowcc">
+                                             <t t-foreach="get_memories_album" t-as="mem">
+
+                                                <div class="column">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+
+                                                                            <img  t-attf-src="data:image/png;base64,{{mem.album_photo}}"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:215PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                                            <t t-esc="mem.album_desc"/>  <a t-att-href="'/albums_del/%s/del' % mem.id" style="margin-left:145px;" onclick="return confirm('Are you sure?')">&#10008;</a><br/>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                </div>
+                                                 </t>
+                                            </div>
+
+                                     </td>
+                                 </tr>
+                             </table>
+
+                 </t>
+            </div>
+        </div>
+      </template>
+     <template id="album_more_del_page">
+    <t t-call="website.layout">
+        <t t-set="title">DelPage</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                <center><br/>
+                 <h3>image deleted successfully.</h3>
+                        <a href="/all_memory" class="nav-link">View album</a>
+                </center>
+
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+</odoo>

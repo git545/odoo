@@ -1,0 +1,311 @@
+
+<odoo>
+    <template id="event_temp">
+        <t t-set="title">Event</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" >
+                                         <div class="wrapper" >
+                                         <div class="section">
+                                                 <div class="form-group"><br/>
+                                                       <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u><label>Create New Event</label></u></center></h4>
+                                                   <hr/>
+                                                      <form  action="/event" method='POST' enctype="multipart/form-data">
+                                                      <table>
+                                                          <tr>
+                                                              <td>
+                                                                  <label style=" border: 1px solid #ccc;display: inline-block;height:50px;  padding: 6px 12px;cursor: pointer;">
+<!--                                                                    <label class="col-form-label" for="epicid"><br/> :</label>-->
+                                                                  	<input type = "file" name = "event_img" accept="image/*" />
+                                                                      Event Photo
+                                                                  </label>
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                             <td>
+                                                                 <label>Event Title:<font color="red"><b>*</b></font></label>
+                                                                 <input type="text" class="form-control" name="txt_eventtitle" required="true" placeholder="Alumini meet" />
+                                                             </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td>
+                                                                  <label>Start Date:<font color="red"><b>*</b></font></label>
+                                                                   <input type="text" class="form-control" name="txt_startdate" required="true" placeholder="DD/MM/YYYY" />
+                                                              </td>
+                                                          </tr>
+                                                            <tr>
+                                                              <td>
+                                                                  <label>End Date:</label>
+                                                                   <input type="text" class="form-control" name="txt_enddate"  placeholder="DD/MM/YYYY" />
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td>
+                                                                  <table>
+                                                                      <tr>
+                                                                              <td>
+                                                                            <label>Event Time:</label>
+                                                                 <br/> Hours:<br/>
+										 		<select name="event_time_hours" t-attf-class="form-control" style="width:auto;" required="true" >
+											 			<t t-foreach="event_hours" t-as="hrs">
+													<option t-att-value="hrs">
+															<t t-esc="hrs" />
+															</option>
+														</t>
+												</select>
+                                                              </td>
+                                                          <td>
+                                                         <br/>     Mins:<br/>
+                                                                <select name="event_time_min" t-attf-class="form-control" style="width:auto;" required="true" >
+                                                                    <option value="00">00</option>
+											 			<t t-foreach="event_min" t-as="mins">
+													<option t-att-value="mins">
+															<t t-esc="mins" />
+															</option>
+														</t>
+												</select>
+                                                          </td>
+                                              <td>
+<br/><br/>
+                                                <select name="event_time_ampm" t-attf-class="form-control" style="width:auto;" required="true" >
+											 			<t t-foreach="event_ampm" t-as="p">
+													<option t-att-value="p">
+															<t t-esc="p" />
+															</option>
+														</t>
+												</select>
+                                                              </td>
+                                                                      </tr>
+                                                                  </table>
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td>
+                                                                  <label for="url">Enter an https:// URL:</label>
+                                                                  <input type="url" name="url" id="url"  placeholder="https://example.com"  pattern="https://.*" />
+                                                              </td>
+                                                          </tr>
+                                                           <tr>
+                                                              <td>
+                                                                  <label>Description:<font color="red"><b>*</b></font></label>
+
+                                                 <textarea id="txtEditor" class="form-control" name="txtEditor" required="true" rows="4" cols="45">
+												</textarea>
+
+                                                              </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <td>
+
+                                                                 <input type="submit" class="btn btn-primary" value="Add Event" />
+                                                              </td>
+                                                          </tr>
+                                                     </table>
+                                                       </form>
+                                                </div>
+                                         </div>
+                                         </div>
+                                     </td>
+                                 </tr>
+                             </table>
+       </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+        <div class="oe_structure"/>
+</template>
+    <template id="save_event">
+        <t t-set="title">View Event</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" >
+                                           <center>
+                 <h3>Event created successfully saved.</h3>
+                        <a href="/viewevent" class="nav-link">View event</a>
+                </center>
+
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+      </template>
+    <template id="event_error">
+        <t t-set="title">Create Event</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                     <div class="wrapper">
+                         <div class="section">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" >
+                                           <center>
+                                             <h3>  <p class="alert alert-danger" t-if="album_error" role="alert">
+                                                    <t t-esc="album_error"/>
+                                                    </p></h3>
+                                                    <a href="/crevent" class="nav-link">Go Back to event</a>
+                                            </center>
+                                     </td>
+                                 </tr>
+                             </table>
+                         </div>
+                     </div>
+                 </t>
+            </div>
+        </div>
+      </template>
+  <template id="view_event">
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" valign="top">
+                                             <html>
+                                                 <head>
+                                                     <style>
+                                                        * {
+                                                          box-sizing: border-box;
+                                                        }
+
+                                                        /* Create three equal columns that floats next to each other */
+                                                        .column {
+                                                          float: left;
+                                                          width: 257px;
+                                                          padding: 10px;
+                                                        }
+
+                                                        /* Clear floats after the columns */
+                                                        .rowcc {
+                                                          content: "";
+                                                          display: table;
+                                                          clear: both;
+                                                           width:auto;
+                                                        }
+                                                        </style>
+                                                 </head>
+                                             </html>
+                                             <br/>
+                                             <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u> <label>View Event</label></u></center></h4>
+                                             <hr/>
+                                             <div class="rowcc">
+                                             <t t-foreach="event_get" t-as="eget">
+                                                <div class="column">
+                                                            <table>
+                                                                <tr>
+                                                                    <td >
+                                                                            <a t-att-href="'/viewevent/%s/view'%eget.id">
+                                                                                <t t-if="eget.event_img==''">
+                                                                                       <img  t-attf-src="/gvp_website/static/event.png"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:220PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                                                </t>
+                                                                                 <t t-else="eget.event_img!=''">
+                                                                            <img  t-attf-src="data:image/png;base64,{{eget.event_img}}"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:220PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                                                 </t>
+                                                                               <font color="black"><b><t t-esc="eget.event_title"/> </b></font><br/>
+<!--                                                                                <small>Event date :<t t-esc="eget.event_startdate"/>-<t t-esc="eget.event_enddate"/><br/>-->
+<!--                                                                                       Event Time: <t t-esc="eget.event_time"/><br/>-->
+<!--                                                                                       Event Url : <t t-esc="eget.event_url"/> </small><br/>-->
+
+                                                                        </a>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                </div>
+                                                 </t>
+                                            </div>
+
+                                     </td>
+                                 </tr>
+                             </table>
+
+                 </t>
+            </div>
+        </div>
+      </template>
+     <template id="view_details">
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                 <t t-call="website.layout">
+                             <table>
+                                 <tr>
+<!--                                     <td valign="top">-->
+<!--                                         <t t-call="gvp_website.sidemenu_gvp"/>-->
+<!--                                     </td>-->
+                                     <td align="left" valign="top">
+                                         <t t-foreach="get_event_detail" t-as="eget">
+                                             <table>
+                                                <tr>
+                                                    <td>
+                                                        <center>
+                                                          <t t-if="eget.event_img==''">
+                                                              <img  t-attf-src="/gvp_website/static/event.png"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:350PX;height:258PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                           </t>
+                                                           <t t-else="eget.event_img!=''">
+                                                               <img  t-attf-src="data:image/png;base64,{{eget.event_img}}"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:350PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                            </t>
+                                                        </center>
+                                                        <br/>
+                                                        <font color="black"><b><t t-esc="eget.event_title"/> </b></font><br/>
+                                                        <small>Event date :<t t-esc="eget.event_startdate"/>-<t t-esc="eget.event_enddate"/><br/>
+                                                               Event Time: <t t-esc="eget.event_time"/><br/>
+                                                               </small><br/>
+
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                     <td>
+                                                         <center>
+                                                         <hr/>
+                                                         <h1>Details</h1>
+                                                         <hr/>
+                                                         </center>
+                                                         <t t-esc="eget.event_desc"/>
+                                                        <t t-esc="eget.event_url"/>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </t>
+                                     </td>
+                                 </tr>
+                             </table>
+
+                 </t>
+            </div>
+        </div>
+      </template>
+
+</odoo>

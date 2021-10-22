@@ -1,0 +1,24 @@
+<odoo>
+      <record id="action_uni_list" model="ir.actions.act_window">
+        <field name="name">University List</field>
+        <field name="res_model">tbl_uni_name</field>
+    </record>
+    <record id="Uni_name_search" model="ir.ui.view">
+        <field name="name">UniversityName: search</field>
+        <field name="model">tbl_uni_name</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="uniname"/>
+            </search>
+        </field>
+</record>
+   <record id="gvp_uni_list" model="ir.ui.view">
+        <field name="name">University: list</field>
+        <field name="model">tbl_uni_name</field>
+        <field name="arch" type="xml">
+            <tree string="unilist">
+                <field name="uniname"/>
+           </tree>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,96 @@
+<odoo>
+     <template id="event_del_page">
+    <t t-call="website.layout">
+        <t t-set="title">DelPage</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                <center><br/>
+                 <h3>event deleted successfully.</h3>
+                        <a href="/allevent" class="nav-link">View event</a>
+                </center>
+
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+ <template id="all_event">
+    <t t-call="website.layout">
+        <t t-set="title">Events</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                              <table width="100%">
+                                  <tr>
+                                         <td>
+                                          <html>
+                                                 <head>
+                                                     <style>
+                                                        * {
+                                                          box-sizing: border-box;
+                                                        }
+
+                                                        /* Create three equal columns that floats next to each other */
+                                                        .column {
+                                                          float: left;
+                                                          width: 257px;
+                                                          padding: 10px;
+                                                        }
+
+                                                        /* Clear floats after the columns */
+                                                        .rowcc {
+                                                          content: "";
+                                                          display: table;
+                                                          clear: both;
+                                                           width:auto;
+                                                        }
+                                                        </style>
+                                                 </head>
+                                             </html>
+                                             <br/>
+                                             <h4 style="background-color:#2c7372;border:1px solid black;color:white;"><center><u> <label>View Event</label></u></center></h4>
+                                             <hr/>
+                                             <div class="rowcc">
+                                             <t t-foreach="event_get" t-as="eget">
+                                                <div class="column">
+                                                            <table>
+                                                                <tr>
+                                                                    <td >
+                                                                            <a t-att-href="'/viewevent/%s/view'%eget.id">
+                                                                                <t t-if="eget.event_img==''">
+                                                                                       <img  t-attf-src="/gvp_website/static/event.png"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:220PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                                                </t>
+                                                                                 <t t-else="eget.event_img!=''">
+                                                                            <img  t-attf-src="data:image/png;base64,{{eget.event_img}}"  style="border: 1px solid #b3b3bf;border-radius: 6px;width:220PX;height:218PX;margin-left:2px;padding: 12px 12px 12px 12px; "/><br/>
+                                                                                 </t>
+
+                                                                                 <t t-if="request.session.uid == eget.userid">
+                                                                                     <font color="black"><b><t t-esc="eget.event_title"/> </b></font> <a t-att-href="'/event_del/%s/del' % eget.id" style="margin-left:145px;" onclick="return confirm('Are you sure?')">&#10008;</a>
+                                                                                 </t>
+                                                                                  <t t-if="request.session.uid!=eget.userid">
+                                                                                      <font color="black"><b><t t-esc="eget.event_title"/>  </b></font>
+                                                                                  </t>
+<!--                                                                                <small>Event date :<t t-esc="eget.event_startdate"/>-<t t-esc="eget.event_enddate"/><br/>-->
+<!--                                                                                       Event Time: <t t-esc="eget.event_time"/><br/>-->
+<!--                                                                                       Event Url : <t t-esc="eget.event_url"/> </small><br/>-->
+
+                                                                        </a>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+
+                                                </div>
+                                                 </t>
+                                            </div>
+
+                                     </td>
+                                 </tr>
+                             </table>
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+</odoo>

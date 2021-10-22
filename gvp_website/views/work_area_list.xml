@@ -1,0 +1,24 @@
+<odoo>
+      <record id="work_list_action" model="ir.actions.act_window">
+        <field name="name">Functional Area List</field>
+        <field name="res_model">tbl_functional_area</field>
+    </record>
+    <record id="funi_name_search" model="ir.ui.view">
+        <field name="name">WorkAreaName: search</field>
+        <field name="model">tbl_functional_area</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="funname"/>
+            </search>
+        </field>
+</record>
+   <record id="gvp_fununi_list" model="ir.ui.view">
+        <field name="name">WorkArea: list</field>
+        <field name="model">tbl_functional_area</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="funname"/>
+           </tree>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,176 @@
+<odoo>
+ <template id="home">
+    <t t-call="website.layout">
+        <t t-set="title">home</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                <center>
+               <h3>Welcome,Gujarat Vidyapith Alumini Association</h3>
+  <a href="/edu" class="nav-link">Please fill your profile details</a>
+                </center>
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+    <template id="save_page">
+    <t t-call="website.layout">
+        <t t-set="title">savePage</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                <center><br/>
+                 <h3>Data save successfully saved.</h3>
+                        <a href="/myprofile" class="nav-link">View Your profile</a>
+                </center>
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+     <template id="del_page">
+    <t t-call="website.layout">
+        <t t-set="title">DelPage</t>
+        <div class="oe_structure"/>
+        <div class="oe_structure">
+            <div class="container">
+                <center><br/>
+                 <h3>Data deleted successfully.</h3>
+                        <a href="/myprofile" class="nav-link">View Your profile</a>
+                </center>
+
+            </div>
+        </div>
+        <div class="oe_structure"/>
+    </t>
+</template>
+    <template id="userdata_profile" name="My Portal">
+        <style>
+        img {
+              border: 1px solid navy;
+              border-radius: 6px;
+              padding: 5px;
+              width: 250px;height:250px;
+            }
+
+        img:hover {
+                 box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+            }
+    </style>
+        <t t-call="website.layout">
+            <!--		**********************************************************				-->
+ <t t-foreach="basic_info" t-as="b">
+	  <t t-if="b.fname == '0'">
+            <div class="container">
+                <center>
+               <h3>Welcome,Gujarat Vidyapith Alumini Association</h3>
+                    <a href="/edu" class="nav-link">Please fill your profile details</a>
+                </center>
+            </div>
+      </t>
+     <t t-else="b.fname!= ''">
+               <t t-set="title">My Profile</t>
+                    <div class="oe_structure">
+                    <div class="container">
+                        <center>
+                            <h3><u>Profile Details</u></h3>
+                            <div>
+                                <table class="table" align="'center" >
+                                       <tr>
+                                           <t t-foreach="basic_info" t-as="bs">
+                                            <td>
+                                                    <img  t-attf-src="data:image/png;base64,{{bs.profile_photo}}"  style="border: 1px solid navy;border-radius: 6px;"/>
+                                            </td>
+                                            <td>
+                                                <b><u>Basic Info</u></b><br/>
+                                                <font size="8pt" color="navy"><b><t t-esc="bs.fname"/> <t t-esc="bs.lname"/></b></font><br/>
+                                                    <t t-esc="bs.pemail"/><br/>
+                                                    <t t-esc="bs.dob"/><br/>
+                                                    <t t-esc="bs.gender"/><br/>
+                                                    <t t-esc="bs.mobile"/><br/><br/>
+
+                                            </td>
+
+                                           <td>
+                                                        <b><u>Address Info</u></b><br/>
+                                                        <t t-esc="bs.addr"/><br/>
+                                                        <t t-esc="bs.city"/>- <t t-esc="bs.pincode"/><br/>
+                                                        <t t-esc="bs.statename"/> <t t-esc="bs.countryname"/><br/><br/>
+
+                                           </td>
+                                             </t>
+                                        </tr>
+                                </table>
+                            </div>
+                        </center>
+                        <center>
+
+                            <div>
+                                <table class="table">
+                                     <a href="/edu" class="nav-link" align="right">Edit/Add Profile data</a>
+                                    <tr>
+                                        <th><font color="navy">Education Details</font></th>
+                                        <th><font color="navy">Professional Experience</font></th>
+                                        <th><font color="navy">Current Work Profile</font></th>
+                                    </tr>
+                                         <tr>
+                                             <td>
+                                                  <t t-foreach="edu_profile" t-as="edu">
+                                                         <br/><font size="4pt"><b><t t-esc="edu.instname"/></b></font><br/>
+                                                           <t t-esc="edu.course"/><br/>
+                                                           <t t-esc="edu.uniname"/><br/>
+                                                            <t t-if="edu.chkstudy==true">
+                                                                 <t t-esc="edu.fmonth"/> <t t-esc="edu.fyear"/> - Currently Study Here   <br/>
+                                                            </t>
+                                                            <t t-if="edu.chkstudy==false">
+                                                                  <t t-esc="edu.fmonth"/> <t t-esc="edu.fyear"/> - <t t-esc="edu.tmonth"/> <t t-esc="edu.tyear"/> <br/>
+                                                            </t>
+                                                       <a class="btn btn-danger" t-att-href="'/edu_delete/%s/del' % edu.id" onclick="return confirm('Are you sure?')">Delete</a>
+                                                       <hr/>
+                                                  </t>
+
+                                         </td>
+                                             <td>
+                                                  <t t-foreach="work_profile" t-as="work">
+                                                    <br/>   <font size="4pt"><b><t t-esc="work.orgname"/></b></font><br/>
+                                                            <t t-esc="work.desg"/><br/>
+                                                            <t t-esc="work.loc"/><br/>
+                                                            <t t-if="work.chkwork==true">
+                                                                 <t t-esc="work.fmonth"/> <t t-esc="work.fyear"/> - Currently Work Here   <br/>
+                                                            </t>
+                                                            <t t-if="work.chkwork==false">
+                                                                  <t t-esc="work.fmonth"/> <t t-esc="work.fyear"/> - <t t-esc="work.tmonth"/> <t t-esc="work.tyear"/> <br/>
+                                                            </t>
+                                                         <a class="btn btn-danger" t-att-href="'/exp_delete/%s/del' % work.id" onclick="return confirm('Are you sure?')">Delete</a>
+                                                       <hr/>
+                                                 </t>
+
+                                             </td>
+                                             <td>
+                                             <t t-foreach="current_profile" t-as="cur">
+                                                     <font size="4pt"><b>Functional Area :</b> <br/><t t-esc="cur.farea"/></font><br/>
+                                                     <b>Relevant Experience :</b>  <t t-esc="cur.rexp"/><br/>
+                                                     <b>Industry : </b><t t-esc="cur.industry"/><br/>
+                                                     <b>Skills :  </b><t t-esc="cur.skills"/><br/>
+                                             </t>
+                                             <hr/>
+                                             </td>
+                                         </tr>
+                                </table>
+                          </div>
+                        </center>
+                        </div>
+                    </div>
+               </t>
+     </t>
+ </t>
+
+    </template>
+     <template id="my_account_link" name="Link to frontend portal" inherit_id="portal.user_dropdown">
+        <xpath expr="//*[@id='o_logout_divider']" position="replace">
+<!--              <a href="/my/account" role="menuitem" class="dropdown-item" >Edit Profile</a>-->
+              <a href="/my/security" role="menuitem" class="dropdown-item">Change Password</a>
+        </xpath>
+    </template>
+</odoo>
