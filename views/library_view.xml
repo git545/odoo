@@ -26,9 +26,5 @@
         </field>
     </record> 
 
-    <record id="book_publisher_menu_action" model="ir.actions.act_window">
-        <field name="name">Book publisher</field>
-        <field name="res_model">book.publisher.lib</field>
-        <field name="view_mode">tree,form</field>
-    </record>
+  
 </odoo>
