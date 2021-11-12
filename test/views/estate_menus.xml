@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="real_estate_properties_action" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="books_action" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">book</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Property Types</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="real_estate_properties_offer_action" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <record id="book_publisher_menu_action" model="ir.actions.act_window">
+        <field name="name">Book publisher</field>
+        <field name="res_model">book.publisher.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <record id="book_category_menu_action" model="ir.actions.act_window">
+        <field name="name">Book Category</field>
+        <field name="res_model">book.category.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <record id="book_dept_menu_action" model="ir.actions.act_window">
+        <field name="name">Book Department</field>
+        <field name="res_model">book.department.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="book_rack_menu_action" model="ir.actions.act_window">
+        <field name="name">Book Rack</field>
+        <field name="res_model">rack.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="book_shelf_menu_action" model="ir.actions.act_window">
+        <field name="name">Book Shelf</field>
+        <field name="res_model">shelf.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <record id="book_details_menu_action" model="ir.actions.act_window">
+        <field name="name">Book Details</field>
+        <field name="res_model">books.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+ <!-- <record id="book_menu_list" model="ir.ui.view">
+        <field name="name">Booklibrary: list</field>
+        <field name="model">library.book.info</field>
+        <field name="arch" type="xml">
+            <tree string="booklist">
+                <field name="book_name"/>
+           </tree>
+    </field>
+</record> -->
+    <!-- <menuitem id="menu_real_estate_root" name="Estate">
+        <menuitem id="menu_real_estate_advertisments" name="Advertisements">
+            <menuitem id="menu_real_estate_action" actrion="real_estate_properties_action"/>
+            <menuitem id="menu_real_estate_offer_action" action="real_estate_properties_offer_action"/>
+        </menuitem>
+        
+    </menuitem>
+
+    <menuitem id="menu_real_estate_book" name="Book Library" parent="menu_real_estate_root"/>
+    <menuitem id="menu_real_estate_book_action" parent="menu_real_estate_book" action="book_menu_list"/>
+
+    <menuitem id="menu_real_estate_property_type" name="Settings" parent="menu_real_estate_root"/>
+    <menuitem id="menu_real_estate_property_type_action" parent="menu_real_estate_property_type" action="estate_property_type_action"/>
+ -->
+ <menuitem sequence="0" id="menu_estate" name="Estate Demo"/>
+  <menuitem id="menu_estate_root" parent="menu_estate"  name="Librarys"/>
+    <menuitem id="menu_estate_root_menu1" parent="menu_estate_root"  name="Author Details" action="author_menu_action" />
+    <menuitem id="menu_estate_root_menu2" parent="menu_estate_root"  name="Book Category Details" action="book_category_menu_action" />
+      <menuitem id="menu_estate_root_menu3" parent="menu_estate_root"  name="Book Department Details" action="book_dept_menu_action" />
+     <menuitem id="menu_estate_root_menu4" parent="menu_estate_root"  name="Book Publisher Details" action="book_publisher_menu_action" />
+  <menuitem id="menu_estate_root_menu5" parent="menu_estate_root"  name="Book Rack Details" action="book_rack_menu_action" />
+  <menuitem id="menu_estate_root_menu6" parent="menu_estate_root"  name="Book Shelf Details" action="book_shelf_menu_action" />
+  <menuitem id="menu_estate_root_menu7" parent="menu_estate_root"  name="Book Details" action="book_details_menu_action" />
+</odoo>

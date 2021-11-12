@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="author_menu_action" model="ir.actions.act_window">
+        <field name="name">Author</field>
+        <field name="res_model">author.lib</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="author_search" model="ir.ui.view">
+        <field name="name">AuthorName: search</field>
+        <field name="model">author.lib</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+</record>
+    <record id="author_lib_tree" model="ir.ui.view">
+        <field name="name">Author Details</field>
+        <field name="model">author.lib</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="address"/>
+               
+            </tree>
+        </field>
+    </record> 
+
+  
+</odoo>
